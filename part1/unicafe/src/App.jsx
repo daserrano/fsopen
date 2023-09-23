@@ -15,19 +15,20 @@ const Statistics = ({ stats }) => {
 
       {hasStats ?
         <section>
-          <h3>good {good}</h3>
-          <h3>neutral {neutral}</h3>
-          <h3>bad {bad}</h3>
-
-          <h3>all {all}</h3>
-          <h3>average {average}</h3>
-          <h3>positive {positive} %</h3>
+          <StatisticLine text="good" value={good} />
+          <StatisticLine text="neutral" value={neutral} />
+          <StatisticLine text="bad" value={bad} />
+          <StatisticLine text="all" value={all} />
+          <StatisticLine text="average" value={average} />
+          <StatisticLine text="positive" value={positive} />
         </section>
         :
         <h3>No feedback given</h3>}
     </div>
   )
 }
+
+const StatisticLine = ({ text, value }) => <h3>{text} {value}</h3>
 
 function App() {
   const [good, setGood] = useState(0)
