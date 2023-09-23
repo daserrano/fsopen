@@ -5,6 +5,24 @@ const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</
 
 const Head = ({ text }) => <h1>{text}</h1>
 
+const Statistics = ({ stats }) => {
+  const { good = 0, neutral = 0, bad = 0, all = 0, average = 0, positive = 0 } = stats
+
+  return (
+    <div>
+      <Head text="Statistics" />
+
+      <h3>good {good}</h3>
+      <h3>neutral {neutral}</h3>
+      <h3>bad {bad}</h3>
+
+      <h3>all {all}</h3>
+      <h3>average {average}</h3>
+      <h3>positive {positive} %</h3>
+    </div>
+  )
+}
+
 function App() {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
@@ -19,18 +37,18 @@ function App() {
 
     const total = all + 1;
     setAll(total)
-    setAverage((updateGood-bad)/total)
+    setAverage((updateGood - bad) / total)
 
-    setPositive((updateGood/total)*100)
+    setPositive((updateGood / total) * 100)
   }
   const handleNeutral = () => {
     setNeutral(neutral + 1)
 
     const total = all + 1;
     setAll(total)
-    setAverage((good-bad)/total)
+    setAverage((good - bad) / total)
 
-    setPositive((good/total)*100)
+    setPositive((good / total) * 100)
   }
   const handleBad = () => {
     const updateBad = bad + 1;
@@ -38,9 +56,9 @@ function App() {
 
     const total = all + 1;
     setAll(total)
-    setAverage((good-updateBad)/total)
+    setAverage((good - updateBad) / total)
 
-    setPositive((good/total)*100)
+    setPositive((good / total) * 100)
   }
 
   return (
@@ -50,14 +68,15 @@ function App() {
       <Button text="neutral" handleClick={handleNeutral} />
       <Button text="bad" handleClick={handleBad} />
 
-      <Head text="Statistics" />
-      <h3>good {good}</h3>
-      <h3>neutral {neutral}</h3>
-      <h3>bad {bad}</h3>
-
-      <h3>all {all}</h3>
-      <h3>average {average}</h3>
-      <h3>positive {positive} %</h3>
+      <Statistics stats={{
+        good: good,
+        neutral: neutral,
+        bad: bad,
+        all: all,
+        average: average,
+        positive: positive
+      }
+      } />
     </main>
   )
 }
