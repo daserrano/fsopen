@@ -14,21 +14,31 @@ const Statistics = ({ stats }) => {
       <Head text="Statistics" />
 
       {hasStats ?
-        <section>
-          <StatisticLine text="good" value={good} />
-          <StatisticLine text="neutral" value={neutral} />
-          <StatisticLine text="bad" value={bad} />
-          <StatisticLine text="all" value={all} />
-          <StatisticLine text="average" value={average} />
-          <StatisticLine text="positive" value={positive} />
-        </section>
+        <table>
+          <tbody>
+            <StatisticLine text="good" value={good} />
+            <StatisticLine text="neutral" value={neutral} />
+            <StatisticLine text="bad" value={bad} />
+            <StatisticLine text="all" value={all} />
+            <StatisticLine text="average" value={average} />
+            <StatisticLine text="positive" value={positive} />
+          </tbody>
+        </table>
         :
         <h3>No feedback given</h3>}
     </div>
   )
 }
 
-const StatisticLine = ({ text, value }) => <h3>{text} {value}</h3>
+const StatisticLine = ({ text, value }) => {
+
+  return (
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
+  )
+}
 
 function App() {
   const [good, setGood] = useState(0)
