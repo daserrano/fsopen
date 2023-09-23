@@ -7,18 +7,24 @@ const Head = ({ text }) => <h1>{text}</h1>
 
 const Statistics = ({ stats }) => {
   const { good = 0, neutral = 0, bad = 0, all = 0, average = 0, positive = 0 } = stats
+  const hasStats = all > 0;
 
   return (
     <div>
       <Head text="Statistics" />
 
-      <h3>good {good}</h3>
-      <h3>neutral {neutral}</h3>
-      <h3>bad {bad}</h3>
+      {hasStats ?
+        <section>
+          <h3>good {good}</h3>
+          <h3>neutral {neutral}</h3>
+          <h3>bad {bad}</h3>
 
-      <h3>all {all}</h3>
-      <h3>average {average}</h3>
-      <h3>positive {positive} %</h3>
+          <h3>all {all}</h3>
+          <h3>average {average}</h3>
+          <h3>positive {positive} %</h3>
+        </section>
+        :
+        <h3>No feedback given</h3>}
     </div>
   )
 }
