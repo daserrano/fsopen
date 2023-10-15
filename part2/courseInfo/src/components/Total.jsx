@@ -5,7 +5,7 @@ const Total = ({ parts }) => {
     const totals = parts.map(part => part.exercises);
     const numbers = totals.reduce((sum, acc) => sum + acc, 0)
     return (
-        <p>Number of exercises {numbers}</p>
+        <b>Total of {numbers} exercises</b>
     )
 }
 
