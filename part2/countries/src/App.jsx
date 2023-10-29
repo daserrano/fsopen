@@ -21,16 +21,17 @@ function App() {
     
     if (!value) return setCountriesFiltered([])
 
-    const filter = countries.filter(country =>
-      country.name.common.toLowerCase().includes(value.toLowerCase()))
+    const filter = countries.filter(country => country.name.common.toLowerCase().includes(value.toLowerCase()))
     setCountriesFiltered(filter)
   }
+
+  const updateCountries = (country) => setCountriesFiltered(new Array(country))
 
   return (
     <main>
       <h1>🗺️ Countries</h1>
       <Filter filterValue={filterValue} handleInput={handleInput}/>
-      <Countries countries={countriesFiltered} />
+      <Countries countries={countriesFiltered} updateCountries={updateCountries} />
     </main>
   )
 }
