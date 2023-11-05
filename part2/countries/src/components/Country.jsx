@@ -1,4 +1,6 @@
-import React from 'react'
+import axios from 'axios';
+import { useEffect, useState } from 'react'
+import Weather from './Weather';
 
 const Country = ({country}) => {
   const {name, capital, population, languages, flags} = country
@@ -9,7 +11,7 @@ const Country = ({country}) => {
         <p>Capital: {capital.map(capital=> capital)}</p>
         <p>Population: {population}</p>
 
-        <h3>Languages</h3>
+        <h3>Spoken languages</h3>
         <ul>
             {Object.keys(languages).map((key) => (
                 <li key={languages[key]}>{languages[key]}</li>
@@ -18,6 +20,7 @@ const Country = ({country}) => {
         </ul>
 
         <img src={flags.svg} alt={name} width={150}/>
+        <Weather capital={capital}/>
 
     </main>
   )

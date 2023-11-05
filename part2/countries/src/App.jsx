@@ -8,7 +8,7 @@ function App() {
 
   const [countries, setCountries] = useState([]);
   const [filterValue, setFilterValue] = useState("");
-  const [countriesFiltered, setCountriesFiltered] = useState([])
+  const [countriesFiltered, setCountriesFiltered] = useState([]);
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all")
