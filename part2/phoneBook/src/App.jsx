@@ -24,11 +24,21 @@ function App() {
     const addPerson = {
       name: newName,
       number: newNumber,
-      key: persons.length + 1
+      id: persons.length + 1
     }
     personsService.create(addPerson).then(newPerson => setPersons(persons.concat(newPerson)))
     clearInputs()
   }
+
+  const deletePerson = (id) => {
+    const person = persons.find(person => person.id === id)
+    const confirm = window.confirm(`Delete ${person.name} ?`)
+    if(confirm) {
+      personsService.deletePerson(id).then(() => setPersons(persons.filter(person => person.id !== id)))
+
+    }
+  }
+
   const clearInputs = () => {
     setNewName("")
     setNewNumber("")
@@ -52,7 +62,11 @@ function App() {
       />
 
       <h2>Numbers</h2>
-      <Persons persons={persons} filterValue={filterValue} />
+      <Persons 
+        deletePerson={deletePerson} 
+        filterValue={filterValue} 
+        persons={persons} 
+      />
     </div>
   )
 }

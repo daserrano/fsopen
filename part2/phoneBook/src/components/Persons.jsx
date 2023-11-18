@@ -1,14 +1,13 @@
+import Person from "./Person"
 
-const Persons = ({persons, filterValue }) => {
+const Persons = ({ persons, filterValue, deletePerson }) => {
     return (
-        <main style={{textAlign: "left"}}>
+        <div style={{ textAlign: "left" }}>
             {persons.filter(person => person.name.toLowerCase().includes(filterValue.toLowerCase())
             ).map(person => (
-                <p key={person.key}>
-                    <span>{person.name} # {person.number}</span>
-                </p>
+                <Person key={person.id} person={person} deletePerson={deletePerson} />
             ))}
-        </main>
+        </div>
     )
 }
 
