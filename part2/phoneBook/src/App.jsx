@@ -4,6 +4,7 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import axios from 'axios'
+import personsService from '../src/services/persons'
 
 function App() {
   const [persons, setPersons] = useState([]);
@@ -12,9 +13,9 @@ function App() {
   const [filterValue, setFilterValue] = useState('')
 
   useEffect(() => {
-    axios.get('http://localhost:3001/persons')
-    .then(response => setPersons(response.data))
+    personsService.getAll().then(response => setPersons(response))
   }, [])
+
   const addPerson = (event) => {
     event.preventDefault();
 
@@ -25,7 +26,7 @@ function App() {
       number: newNumber,
       key: persons.length + 1
     }
-    setPersons(persons.concat(addPerson))
+    personsService.create(addPerson).then(newPerson => setPersons(persons.concat(newPerson)))
     clearInputs()
   }
   const clearInputs = () => {
@@ -38,7 +39,7 @@ function App() {
   const handleInput = (e) => setFilterValue(e.target.value)
 
   return (
-    <div>
+    <div style={{border: "1px solid #e7e7e7", borderRadius: "20px", padding: "20px", backgroundColor: "#f9f9e9"}}>
       <h2>Phonebook</h2>
       <Filter filterValue={filterValue} handleInput={handleInput} />
 

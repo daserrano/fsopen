@@ -1,10 +1,12 @@
 
 const Persons = ({persons, filterValue }) => {
     return (
-        <main>
+        <main style={{textAlign: "left"}}>
             {persons.filter(person => person.name.toLowerCase().includes(filterValue.toLowerCase())
             ).map(person => (
-                <p key={person.key}>{person.name} {person.number}</p>
+                <p key={person.key}>
+                    <span>{person.name} # {person.number}</span>
+                </p>
             ))}
         </main>
     )
