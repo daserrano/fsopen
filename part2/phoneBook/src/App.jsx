@@ -19,13 +19,23 @@ function App() {
   const addPerson = (event) => {
     event.preventDefault();
 
-    if (persons.find(person => person.name === newName)) return alert(`${newName} is already added to phonebook`)
+    let confirm = false;
+    const personExists = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
+    if (personExists){
+      confirm = window.confirm(`${personExists.name} is already added to phonebook, replace the old number with a new one?`)
+    } 
+      
 
     const addPerson = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1
+      id: personExists ? personExists.id : null
     }
+    confirm ?
+    personsService.update(addPerson).then(updatePerson => {
+      setPersons(persons.filter(person => person.id !== updatePerson.id).concat(updatePerson))
+    })
+    :
     personsService.create(addPerson).then(newPerson => setPersons(persons.concat(newPerson)))
     clearInputs()
   }
