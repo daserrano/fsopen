@@ -39,6 +39,10 @@ function App() {
         setPersons(persons.filter(person => person.id !== updatePerson.id).concat(updatePerson))
         createMessage(`Modified ${updatePerson.name}`)
       })
+      .catch(error => {
+        createMessage(`Information of ${addPerson.name} has already been removed from server`)
+        console.error(error)
+      })
     :
     personsService.create(addPerson).then(newPerson => {
       setPersons(persons.concat(newPerson))
@@ -56,8 +60,8 @@ function App() {
     const person = persons.find(person => person.id === id)
     const confirm = window.confirm(`Delete ${person.name} ?`)
     if(confirm) {
-      personsService.deletePerson(id).then(() => setPersons(persons.filter(person => person.id !== id)))
-
+      personsService.deletePerson(id)
+      .then(() => setPersons(persons.filter(person => person.id !== id)))
     }
   }
 
@@ -73,7 +77,7 @@ function App() {
   return (
     <div style={{border: "1px solid #e7e7e7", borderRadius: "20px", padding: "20px", backgroundColor: "#f9f9e9"}}>
       <h1>Phonebook</h1>
-      <Alert message={message} />
+      <Alert message={message}/>
       <Filter filterValue={filterValue} handleInput={handleInput} />
 
       <PersonForm
