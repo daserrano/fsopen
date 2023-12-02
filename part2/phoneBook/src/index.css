@@ -66,3 +66,13 @@ button:focus-visible {
     background-color: #e3e3f3;
   }
 }
+
+.alert {
+  color: #008000;
+  background: #A0F0A0;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
